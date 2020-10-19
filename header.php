@@ -7,7 +7,7 @@
 	<!-- Favicon-->
 	<link rel="shortcut icon" href="img/logo.png">
 	<!-- Author Meta -->
-	<meta name="author" content="codepixer">
+	<meta name="author" content="">
 	<!-- Meta Description -->
 	<meta name="description" content="">
 	<!-- Meta Keyword -->
@@ -30,6 +30,7 @@
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="css/owl.carousel.css">
 	<link rel="stylesheet" href="css/main.css">
+	<link href="css/mainForm.css" rel="stylesheet" media="all">
 </head>
 
 <body>
@@ -44,17 +45,17 @@
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
 						<li class="menu-active"><a href="index.php">Home</a></li>
-						<li class="menu-has-children"><a href="#">Profile</a>
-						<li><a href="#">NGO'S</a></li>
-						<li><a href="#">Donate</a></li>
+						<li><a href="login_form.php">NGO login</a></li>
+						<li><a href="donation.php">Donate</a></li>
 						</li>
 						<li class="menu-has-children"><a href="#">Pages</a>
 							<ul>
-								<li><a href="#">Donation</a></li>
+								<li><a href="donation.php">Donation</a></li>
+								<li><a href="login_form.php">NGO login</a></li>
 							</ul>
 						</li>
-						<li><a href="#">Contact</a></li>
-						<li><a href="#">About</a></li>
+						<li><a href="contact.php">Contact</a></li>
+						<li><a href="about.php">About</a></li>
 					</ul>
 				</nav><!-- #nav-menu-container -->
 			</div>
