@@ -11,7 +11,7 @@ $ngo_email = $_POST['ngoemail'];
 $name = $_POST['username'];
 $pass = $_POST['password'];
 
-$q = "select * from signup where username = '$name' ";
+$q = "select * from markers where username = '$name' ";
 
 $result = mysqli_query($con, $q);
 
@@ -20,7 +20,7 @@ $num = mysqli_num_rows($result);
 if($num == 1){
     echo "username already taken";
 }else{
-    $qy = "insert into signup(NGO_name, NGO_email, username, password) values('$ngo_name','$ngo_email', '$name', '$pass')";
+    $qy = "insert into markers(name, email, username, password) values('$ngo_name','$ngo_email', '$name', '$pass')";
     mysqli_query($con,$qy);
     header('location:login_form.php');
 }

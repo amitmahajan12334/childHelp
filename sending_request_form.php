@@ -1,3 +1,48 @@
+<?php
+
+require 'db.php';
+$msg = "";
+
+if(isset($_POST['subm'])){ 
+
+	// $target = "images/".basename($_FILES['image']['name']);
+
+	$l1 = $_POST['lats'];
+    $l2 = $_POST['longs'];
+
+	$child_name=$_POST['childName'];
+	$child_age=$_POST['age'];
+	$child_parents=$_POST['parents'];
+	$edu=$_POST['education'];
+	$child_image=$_FILES['file'];
+
+	$filename = $child_image['name'];
+	$fileerror = $child_image['error'];
+	$filetmp = $child_image['tmp_name'];
+
+	$fileext = explode('.',$filename);
+	$filecheck = strtolower(end($fileext));
+
+	$fileextstored = array('png', 'jpg', 'jpeg');
+
+	if(in_array($filecheck,$fileextstored)){
+		$destinationfile = 'uploaded/'.$filename;
+		move_uploaded_file($filetmp,$destinationfile);
+
+
+		$sql="INSERT INTO child_details(childName,childAge,parents,education,image)VALUES('$child_name','$child_age','$child_parents','$edu','$filename')";
+
+		mysqli_query($con, $sql);
+
+		header("location: nearest.php?lat=$l1&long=$l2");
+	}
+	
+	
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -32,7 +77,24 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 
-<body>
+<body onload="getLocation()">
+
+
+<script type="text/javascript">
+    function getLocation(){
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+
+        }
+    }
+
+    function showPosition(position){
+        document.getElementById("lats").value=+position.coords.latitude;
+        document.getElementById("longs").value=+position.coords.longitude;
+    }
+
+</script>
+
 
 	<!-- Start Header Area -->
 	<?php include 'header.php'; ?>
@@ -89,39 +151,48 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-6 col-md-10 col-sm-12">
 					<div class="donation-box">
-						<form action="a.php" method="GET">
+						<form method="POST" enctype="multipart/form-data">
 							<div class="donation-input">
 								<div class="form-group">
+									<input type="text" class="form-control" name="lats" id="lats">
+							    	<input type="text" class="form-control" name="longs" id="longs">
+								</div>
+
+								<div class="form-group">
 									<label for="name">Child Name</label>
-									<input type="text" class="form-control" id="name" name="name" value="">
+									<input type="text" class="form-control" id="name" name="childName" required>
 								</div>
 
 								<div class="form-group">
 									<label for="age">Age</label>
-									<input type="number" class="form-control" id="age" name="age" value="">
+									<input type="number" class="form-control" id="age" name="age" required>
+								</div>
+
+								<div class="form-group" style="padding-top:20px;">
+									<label for="parents">Parents/gardians</label>
+									<div>
+										<input type="radio" name="parents" id="pyes" value="yes"> <label for="yes">Yes</label> <br>
+										<input type="radio" name="parents" id="pno" value="no"> <label for="no">No</label> <br>
+										<input type="radio" name="parents" id="pdno" value="don't"> <label for="don't">Don't Know</label>
+									</div>
+								</div>
+
+								<div class="form-group" style="padding-top:20px;">
+									<label for="education">Education</label> 
+									<div>
+										<input type="radio" name="education" value="primary"> <label>Yes/ Primary Educaion</label> <br>
+										<input type="radio" name="education" value="notEducated"> <label>No</label> <br>
+									</div>
 								</div>
 
 								<div class="form-group">
-									<label for="parents">Parents/gardians</label> <br>
-									<input type="radio"> <label>Yes</label> <br>
-									<input type="radio"> <label>No</label> <br>
-									<input type="radio"> <label>Don't Know</label>
+									<label for="file">Select a picture</label> <br>
+									<input type="file" name="file" id="file">
 								</div>
 
-								<div class="form-group">
-									<label for="education">Education</label> <br>
-									<input type="radio"> <label>Yes/ Primary Educaion</label> <br>
-									<input type="text" name="primaryEducation"> <br>
-									<input type="radio"> <label>No</label> <br>
-								</div>
-
-								<div class="form-group">
-									<label for="uploading image">Select a picture</label> <br>
-									<input type="file" accept="image/" capture>
-								</div>
 							</div>
-
-							<input type="Submit" name="sendingRequest" class="primary-btn w-100" value="Submit"/>
+							<button class="primary-btn w-100" type="submit" name="subm" id="subm">Submit</button>
+							<!-- <input type="Submit" name="subm" id="subm" class="primary-btn w-100" value="Submit"/> -->
 						</form>						
 					</div>
 				</div>

@@ -54,7 +54,21 @@
 
 </style>
 </head>
-<body>
+<body onload="getLocation()">
+<script type="text/javascript">
+    function getLocation(){
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+
+        }
+    }
+
+    function showPosition(position){
+        document.getElementById("lats").value=+position.coords.latitude;
+        document.getElementById("longs").value=+position.coords.longitude;
+    }
+</script>
+
 	
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
@@ -63,6 +77,11 @@
 					Account Login
 				</span>
 				<form action="login.php" method="post" class="login100-form validate-form p-b-33 p-t-5">
+
+			
+					<input class="input100" type="hidden" name="lats" id="lats">
+					<input class="input100" type="hidden" name="longs" id="longs">
+
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="username" placeholder="User name">
