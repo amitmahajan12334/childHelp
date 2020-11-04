@@ -40,48 +40,57 @@ if(isset($_POST['subm'])){
 	$results = $query -> fetchALL(PDO::FETCH_OBJ);
 
 
-if($query->rowCount()> 0){
+
+
+
+
+
+
+
+
+
+
+	
+
+// if($query->rowCount()> 0){
     
-    foreach($results as $result) {
+//     foreach($results as $result) {
 
 
-		$mail = new PHPMailer;
+// 		$mail = new PHPMailer;
 
-		// $mail->SMTPDebug = 4;                               // Enable verbose debug output
+// 		// $mail->SMTPDebug = 4;                               // Enable verbose debug output
 
-		$mail->isSMTP();                                      // Set mailer to use SMTP
-		$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-		$mail->SMTPAuth = true;                               // Enable SMTP authentication
-		$mail->Username = EMAIL;                 // SMTP username
-		$mail->Password = PASS;                           // SMTP password
-		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-		$mail->Port = 587;                                    // TCP port to connect to
+// 		$mail->isSMTP();                                      // Set mailer to use SMTP
+// 		$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+// 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+// 		$mail->Username = EMAIL;                 // SMTP username
+// 		$mail->Password = PASS;                           // SMTP password
+// 		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+// 		$mail->Port = 587;                                    // TCP port to connect to
 
-		$mail->setFrom(EMAIL, 'Helping Hand');
-		$mail->addAddress($result->email             );     // Add a recipient
+// 		$mail->setFrom(EMAIL, 'Helping Hand');
+// 		$mail->addAddress($result->email             );     // Add a recipient
 
-		$mail->addReplyTo(EMAIL);
-		// print_r($_FILES['file']); exit;
-		// for ($i=0; $i < count($_FILES['file']['tmp_name']) ; $i++) { 
-		// 	$mail->addAttachment($_FILES['file']['tmp_name'][$i], $_FILES['file']['name'][$i]);    // Optional name
-		// }
-		$mail->addAttachment($_FILES['file']['tmp_name'], $_FILES['file']['name']);
+// 		$mail->addReplyTo(EMAIL);
+		
+// 		$mail->addAttachment($_FILES['file']['tmp_name'], $_FILES['file']['name']);
 
-		$mail->isHTML(true);                                  // Set email format to HTML
+// 		$mail->isHTML(true);                                  // Set email format to HTML
 
-		$mail->Subject = 'Help child';
-		$mail->Body    = '<div style="border:2px solid red;">This is the HTML message body <b>in bold!</b></div>
-		<p>Amit MAhajan</p>';
-		$mail->AltBody = 'helping is a good nature';
+// 		$mail->Subject = 'Help child';
+// 		$mail->Body    = '<div style="border:2px solid red;">This is the HTML message body <b>in bold!</b></div>
+// 		<p>Amit MAhajan</p>';
+// 		$mail->AltBody = 'helping is a good nature';
 
-		if(!$mail->send()) {
-			echo 'Message could not be sent.';
-			echo 'Mailer Error: ' . $mail->ErrorInfo;
-		} else {
-			//  header("location: sending_request_form.php");
-		}
-	}
-}
+// 		if(!$mail->send()) {
+// 			echo 'Message could not be sent.';
+// 			echo 'Mailer Error: ' . $mail->ErrorInfo;
+// 		} else {
+// 			//  header("location: sending_request_form.php");
+// 		}
+// 	}
+// }
 
 
 
@@ -115,7 +124,7 @@ if($query->rowCount()> 0){
 		
 
 
-		//  header("location: send_mail.php?lat=$l1&long=$l2&child=$child_name");
+		header("location: sending_request_form.php");
 	}
 	
 	
