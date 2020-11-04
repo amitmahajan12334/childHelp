@@ -1,11 +1,12 @@
 <?php
 
 require 'db.php';
+require 'db1.php';
+require 'PHPMailerAutoload.php';
+require 'credential.php';
 $msg = "";
 
 if(isset($_POST['subm'])){ 
-
-	// $target = "images/".basename($_FILES['image']['name']);
 
 	$l1 = $_POST['lats'];
     $l2 = $_POST['longs'];
@@ -17,6 +18,7 @@ if(isset($_POST['subm'])){
 	$child_image=$_FILES['file'];
 
 	$filename = $child_image['name'];
+
 	$fileerror = $child_image['error'];
 	$filetmp = $child_image['tmp_name'];
 
@@ -25,16 +27,95 @@ if(isset($_POST['subm'])){
 
 	$fileextstored = array('png', 'jpg', 'jpeg');
 
+
+
+
+
+	$sql = "SELECT id,name,email, (3959 * acos( cos( radians($l1)) * cos( radians( lat )) * cos( radians( lng ) - radians($l2))
+        + sin( radians($l1)) * sin( radians( lat )))) AS distance FROM markers HAVING distance < 20  ORDER BY distance
+		LIMIT 0, 20";
+
+	$query = $dbh ->prepare($sql);
+	$query->execute();
+	$results = $query -> fetchALL(PDO::FETCH_OBJ);
+
+
+if($query->rowCount()> 0){
+    
+    foreach($results as $result) {
+
+
+		$mail = new PHPMailer;
+
+		// $mail->SMTPDebug = 4;                               // Enable verbose debug output
+
+		$mail->isSMTP();                                      // Set mailer to use SMTP
+		$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		$mail->Username = EMAIL;                 // SMTP username
+		$mail->Password = PASS;                           // SMTP password
+		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = 587;                                    // TCP port to connect to
+
+		$mail->setFrom(EMAIL, 'Helping Hand');
+		$mail->addAddress($result->email             );     // Add a recipient
+
+		$mail->addReplyTo(EMAIL);
+		// print_r($_FILES['file']); exit;
+		// for ($i=0; $i < count($_FILES['file']['tmp_name']) ; $i++) { 
+		// 	$mail->addAttachment($_FILES['file']['tmp_name'][$i], $_FILES['file']['name'][$i]);    // Optional name
+		// }
+		$mail->addAttachment($_FILES['file']['tmp_name'], $_FILES['file']['name']);
+
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		$mail->Subject = 'Help child';
+		$mail->Body    = '<div style="border:2px solid red;">This is the HTML message body <b>in bold!</b></div>
+		<p>Amit MAhajan</p>';
+		$mail->AltBody = 'helping is a good nature';
+
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			//  header("location: sending_request_form.php");
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	if(in_array($filecheck,$fileextstored)){
 		$destinationfile = 'uploaded/'.$filename;
 		move_uploaded_file($filetmp,$destinationfile);
 
 
-		$sql="INSERT INTO child_details(childName,childAge,parents,education,image)VALUES('$child_name','$child_age','$child_parents','$edu','$filename')";
+		$sql="INSERT INTO child_details(childName,childAge,parents,education,image)VALUES('$child_name','$child_age','$child_parents','$edu','$destinationfile')";
 
 		mysqli_query($con, $sql);
 
-		header("location: nearest.php?lat=$l1&long=$l2");
+
+		
+
+
+		//  header("location: send_mail.php?lat=$l1&long=$l2&child=$child_name");
 	}
 	
 	
