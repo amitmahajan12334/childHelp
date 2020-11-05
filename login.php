@@ -18,6 +18,8 @@ $result = mysqli_query($con, $q);
 
 $num = mysqli_num_rows($result);
 
+$userData = mysqli_fetch_assoc($result);
+
 
 // include 'db1.php';
 
@@ -33,7 +35,7 @@ $num = mysqli_num_rows($result);
 // $res = mysqli_fetch_array($query);
 
 if($num == 1){
-    $_SESSION['user'] = $name;
+    $_SESSION['user'] = $userData;
     // $_SESSION['id'] = $res['id']; 
     // $_SESSION['name'] = $res['name'];
 

@@ -1,28 +1,3 @@
-<?php
-
-require 'db.php';
-$msg = "";
-
-if(isset($_POST['submit'])){
-	$name=$_POST['name'];
-	$email=$_POST['email'];
-	$phone_number=$_POST['phone_number'];
-	$comment=$_POST['comment'];
-	$donation_money=$_POST['TXN_AMOUNT'];
-	$transection_id=$_POST['ORDER_ID'];
-
-	$sql="INSERT INTO donation(name,email,phone_number,comment,donation_money,transection_id)VALUES('$name','$email','$phone_number','$comment','$donation_money','$transection_id')";
-
-	if(mysqli_query($con,$sql)){
-		$msg="donation money added to the database successfully!";
-	}
-	else{
-		$msg="failed to added donation money!";
-	}
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -141,7 +116,7 @@ if(isset($_POST['submit'])){
 								</div><br>
 
 								<div class="form-group">
-									<input type="number" placeholder="phone number" class="form-control" id="phone_number" name="phone_number" value="" onfocus="this.placeholder = ''" onblur="this.placeholder = 'phone number'">
+									<input type="text" placeholder="phone number" class="form-control" id="phone_number" name="phone_number" value="" onfocus="this.placeholder = ''" onblur="this.placeholder = 'phone number'">
 								</div><br>
 
 								<div class="form-group">

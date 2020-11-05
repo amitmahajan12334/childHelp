@@ -20,15 +20,20 @@ $isValidChecksum = verifychecksum_e($paramList, PAYTM_MERCHANT_KEY, $paytmChecks
 
 if($isValidChecksum == "TRUE") {
 	echo '<script>alert("Transaction Success!")</script>' . "<br/>";
-	if ($_POST["STATUS"] == "TXN_SUCCESS") {
-		echo "<h3><b>Thank You for your donation</b></h3>" . "<br/>";
-		//Process your transaction here as success transaction.
-		//Verify amount & order id received from Payment gateway with your application's order id and amount.
+	// if ($_POST["STATUS"] == "TXN_SUCCESS") {
+
+	
+	// 	header("location: donation.php");
 		
-	}
-	else {
-		echo "<b>Transaction status is failure</b>" . "<br/>";
-	}
+	// 	// echo "<h3><b>Thank You for your donation</b></h3>" . "<br/>";
+	// 	//Process your transaction here as success transaction.
+	// 	//Verify amount & order id received from Payment gateway with your application's order id and amount.
+		
+	// }
+	// else {
+	// 	echo "<b>Transaction status is failure</b>" . "<br/>";
+	// }
+	header("location: donation.php");
 }
 else {
 	echo "<b>Checksum mismatched.</b>";

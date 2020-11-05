@@ -37,9 +37,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 						<img class="img-fluid w-100" src="img/banner/home-banner-img.jpg" alt="">
 					</div>
 					<div class="form-wrap">
-						<p class="mb-20 text-white" style="padding-left: 130px; font-size:20px;">Sending Request</p>
+						<p class="mb-20 text-white" style="padding-left: 10px; font-size:20px;">For Sending Request open this form...</p>
 						<br><br>
-            			<a href="sending_request_form.php" style="font-size: 18px;">
+            			<a href="sending_request_form.php" style="font-size: 16px;">
 			              <button class="open-button">Open Form</button>
 			            </a>
 						<!-- <button class="open-button" onclick="openForm()">Open Form</button> -->

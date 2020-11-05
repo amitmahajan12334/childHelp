@@ -4,7 +4,6 @@ require 'db.php';
 require 'db1.php';
 require 'PHPMailerAutoload.php';
 require 'credential.php';
-$msg = "";
 
 if(isset($_POST['subm'])){ 
 
@@ -30,14 +29,14 @@ if(isset($_POST['subm'])){
 
 
 
-
 	$sql = "SELECT id,name,email, (3959 * acos( cos( radians($l1)) * cos( radians( lat )) * cos( radians( lng ) - radians($l2))
-        + sin( radians($l1)) * sin( radians( lat )))) AS distance FROM markers HAVING distance < 20  ORDER BY distance
-		LIMIT 0, 20";
+	+ sin( radians($l1)) * sin( radians( lat )))) AS distance FROM markers HAVING distance < 20  ORDER BY distance
+	LIMIT 0, 20";
 
 	$query = $dbh ->prepare($sql);
 	$query->execute();
 	$results = $query -> fetchALL(PDO::FETCH_OBJ);
+	var_dump($results);
 
 
 
@@ -110,13 +109,12 @@ if(isset($_POST['subm'])){
 
 
 
-
 	if(in_array($filecheck,$fileextstored)){
 		$destinationfile = 'uploaded/'.$filename;
 		move_uploaded_file($filetmp,$destinationfile);
 
 
-		$sql="INSERT INTO child_details(childName,childAge,parents,education,image)VALUES('$child_name','$child_age','$child_parents','$edu','$destinationfile')";
+		$sql="INSERT INTO child_details(childName,childAge,parents,education,image, lat, lng)VALUES('$child_name','$child_age','$child_parents','$edu','$destinationfile','$l1','$l2')";
 
 		mysqli_query($con, $sql);
 
@@ -225,7 +223,7 @@ if(isset($_POST['subm'])){
 			<div class="row d-flex justify-content-center">
 				<div class="col-lg-5">
 					<div class="text-center text-wrap">
-						<h1 class="mb-25">Help Poor People Around the World</h1>
+						<h1 class="mb-25">Help Needy People Around the World</h1>
 						<p>Good works is giving to the poor and the helpless, but divine works is showing them their worth to the One who matters.</p>
 					</div>
 				</div>
@@ -244,8 +242,8 @@ if(isset($_POST['subm'])){
 						<form method="POST" enctype="multipart/form-data">
 							<div class="donation-input">
 								<div class="form-group">
-									<input type="text" class="form-control" name="lats" id="lats">
-							    	<input type="text" class="form-control" name="longs" id="longs">
+									<input type="hidden" class="form-control" name="lats" id="lats">
+							    	<input type="hidden" class="form-control" name="longs" id="longs">
 								</div>
 
 								<div class="form-group">

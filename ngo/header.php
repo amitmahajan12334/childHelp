@@ -1,13 +1,3 @@
-<?php
-
-session_start();
-if(!isset($_SESSION['user'])){
-    header("location:../login_form.php?lat=$l1&long=$l2");
-}
-
-?>
-
-
 <!doctype html>
 <html lang="en">
     <head>
@@ -36,7 +26,7 @@ if(!isset($_SESSION['user'])){
 				<nav class="navbar navbar-expand-lg navbar-light">
 					<div class="container">
 						<!-- Brand and toggle get grouped for better mobile display -->
-                        <a class="navbar-brand logo_h" href="index.php" style="color: white;"><img src="img/logo1.png" style="height: 60px; width:60px; margin-right:20px;" alt="">welcome <?php echo $_SESSION['user']; ?></a>
+                        <a class="navbar-brand logo_h" href="index.php" style="color: white;"><img src="img/logo1.png" style="height: 60px; width:60px; margin-right:20px;" alt="">welcome <?php echo $_SESSION['user']['name']; ?></a>
                         
                          
 						<!-- Collect the nav links, forms, and other content for toggling -->

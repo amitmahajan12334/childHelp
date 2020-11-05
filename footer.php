@@ -1,3 +1,66 @@
+<?php
+
+require 'db.php';
+
+if(isset($_POST['submit'])) {
+	require 'PHPMailerAutoload.php';
+	require 'credential.php';
+
+	$mail = new PHPMailer;
+
+	// $mail->SMTPDebug = 4;                               // Enable verbose debug output
+
+	$mail->isSMTP();                                      // Set mailer to use SMTP
+	$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+	$mail->SMTPAuth = true;                               // Enable SMTP authentication
+	$mail->Username = EMAIL;                 // SMTP username
+	$mail->Password = PASS;                           // SMTP password
+	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+	$mail->Port = 587;                                    // TCP port to connect to
+
+	$mail->setFrom(EMAIL, 'helping hand');
+	$mail->addAddress($_POST['email']);     // Add a recipient
+
+	$mail->addReplyTo(EMAIL);
+	// print_r($_FILES['file']); exit;
+	// for ($i=0; $i < count($_FILES['file']['tmp_name']) ; $i++) { 
+	// 	$mail->addAttachment($_FILES['file']['tmp_name'][$i], $_FILES['file']['name'][$i]);    // Optional name
+	// }
+	$mail->isHTML(true);                                  // Set email format to HTML
+
+	$mail->Subject = 'confirmation from helping hand';
+	$mail->Body    = 'You are confirm member of helping hand website'.'<br>'.'we will give you every event details about our site';
+
+	if(!$mail->send()) {
+		echo 'Message could not be sent.';
+		echo 'Mailer Error: ' . $mail->ErrorInfo;
+	}
+
+
+	$email=$_POST['email'];
+
+	$sql="INSERT INTO newsletter(email)VALUES('$email')";
+
+	if(mysqli_query($con,$sql)){
+		?>
+		<script>
+			alert("you have got a confirmation message!");
+		</script>
+		<?php
+	}
+	else{
+		$msg="failed to added newsletter!";
+	}
+
+
+
+
+}
+
+?>
+
+
+
 	<!-- start footer Area -->
 	<footer class="footer-area section-gap">
 		<div class="container">
@@ -16,11 +79,10 @@
 						<h6>Newsletter</h6>
 						<p>Stay update with our latest</p>
 						<div class="" id="mc_embed_signup">
-							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-							 method="get" class="form-inline">
-								<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
+							<form method="post" class="form-inline">
+								<input class="form-control" name="email" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
 								 required="" type="email">
-								<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+								<button name="submit" class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
 								<div style="position: absolute; left: -5000px;">
 									<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
 								</div>

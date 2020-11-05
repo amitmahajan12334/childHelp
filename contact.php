@@ -1,3 +1,104 @@
+<?php 
+	if(isset($_POST['sendmail'])) {
+		require 'PHPMailerAutoload.php';
+		require 'credential.php';
+
+		$mail = new PHPMailer;
+
+		// $mail->SMTPDebug = 4;                               // Enable verbose debug output
+
+		$mail->isSMTP();                                      // Set mailer to use SMTP
+		$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		$mail->Username = EMAIL;                 // SMTP username
+		$mail->Password = PASS;                           // SMTP password
+		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = 587;                                    // TCP port to connect to
+
+		$mail->setFrom(EMAIL, $_POST['name']);
+		$mail->addAddress('helpinghandofficial143@gmail.com');     // Add a recipient
+
+		$mail->addReplyTo(EMAIL);
+		// print_r($_FILES['file']); exit;
+		// for ($i=0; $i < count($_FILES['file']['tmp_name']) ; $i++) { 
+		// 	$mail->addAttachment($_FILES['file']['tmp_name'][$i], $_FILES['file']['name'][$i]);    // Optional name
+		// }
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		$mail->Subject = $_POST['subject'];
+		$mail->Body    = $_POST['message'];
+
+		if(!$mail->send()) {
+		    echo 'Message could not be sent.';
+		    echo 'Mailer Error: ' . $mail->ErrorInfo;
+		}
+
+
+
+
+
+
+
+		$mail = new PHPMailer;
+
+		$mail->isSMTP();                                      // Set mailer to use SMTP
+		$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		$mail->Username = EMAIL;                 // SMTP username
+		$mail->Password = PASS;                           // SMTP password
+		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = 587;                                    // TCP port to connect to
+
+		$mail->setFrom(EMAIL, 'Helping Hand');
+		$mail->addAddress($_POST['email']);     // Add a recipient
+
+		$mail->addReplyTo(EMAIL);
+		// print_r($_FILES['file']); exit;
+		// for ($i=0; $i <b count($_FILES['file']['tmp_name']) ; $i++) { 
+		// 	$mail->addAttachment($_FILES['file']['tmp_name'][$i], $_FILES['file']['name'][$i]);    // Optional name
+		// }
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		$mail->Subject = $_POST['subject'];
+		$mail->Body    = '<b>IF YOU SEE SOMEONE WITHOUT A SMILE, GIVE THEM ONE OF YOURS</b>'.'Br>'.'Thank You for your feedback.';
+
+		if(!$mail->send()) {
+		    echo 'Message could not be sent.';
+		    echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			?>
+			<script>
+				alert("ThankYou for your feedback!");
+			</script>
+
+			<?php
+			// header("location: contact.php");
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
+ ?>
+
+
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -92,24 +193,26 @@
 					</div>
 				</div>
 				<div class="col-lg-8">
-					<form class="form-area " id="myForm" action="mail.php" method="post" class="contact-form text-right">
+					<form class="form-area" method="post" class="contact-form text-right" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-lg-6 form-group">
 								<input name="name" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'"
-								 class="common-input mb-20 form-control" required="" type="text">
+								 class="common-input mb-20 form-control" type="text" required>
 
 								<input name="email" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
 								 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control"
-								 required="" type="email">
+								 type="email" required>
 
 								<input name="subject" placeholder="Enter your subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your subject'"
-								 class="common-input mb-20 form-control" required="" type="text">
+								 class="common-input mb-20 form-control" type="text" required>
 								<div class="mt-20 alert-msg" style="text-align: left;"></div>
 							</div>
 							<div class="col-lg-6 form-group">
 								<textarea class="common-textarea form-control" name="message" placeholder="Messege" onfocus="this.placeholder = ''"
-								 onblur="this.placeholder = 'Messege'" required=""></textarea>
-								<button class="primary-btn mt-20 text-white" style="float: right;">Send Message</button>
+								 onblur="this.placeholder = 'messege'" required></textarea>
+
+								 <!-- <input type="submit" name="sendmail" class="primary-btn mt-20 text-white" style="float: right;" value="Send Message"> -->
+								<button type="submit" name="sendmail" class="primary-btn mt-20 text-white" style="float: right;">Send Message</button>
 
 							</div>
 						</div>

@@ -1,4 +1,23 @@
+<?php
+require '../db1.php';
+require "../session.php";
+    $sql = "SELECT * from child_details";
 
+$query = $dbh ->prepare($sql);
+$query->execute();
+$l1 = (double)$_SESSION['user']['lat'];
+$l2 = (double)$_SESSION['user']['lng'];
+echo "My location".$l1." and ".$l2; 
+
+
+$sql = "SELECT id,childName,childAge,parents,education,image,lat,lng, ( 6371 * acos( cos( radians($l1) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians($l2) ) + sin( radians($l1) ) * sin( radians( lat ) ) ) ) AS distance FROM child_details HAVING distance < 25 ORDER BY distance LIMIT 0 , 20;";
+    $query = $dbh ->prepare($sql);
+	$query->execute();
+    $children = $query -> fetchALL(PDO::FETCH_OBJ);
+    foreach ($children as $child) {
+        echo "<br/>$child->childName Distance $child->distance from $child->lat,$child->lng to $l1, $l2<br/>";
+    }
+?>
 
 <!doctype html>
 <html lang="en">
@@ -48,24 +67,29 @@
             </div>
         
             <div class="row">
-                <div class="col-lg-6">
+                
+                <?php
+                    foreach ($children as $child) {
+                        ?>
+                        <div class="col-lg-6">
                     <div class="single_event">
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-6">
                                 <figure>
-                                    <img class="img-fluid w-100" src="img/event/e1.jpg" alt="">
+                                    <img class="img-fluid w-100" src="<?php echo "../".$child->image ?>" alt="">
                                     <div class="img-overlay"></div>
                                 </figure>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="content_wrapper">
                                     <h3 class="title">
-                                        <a href="event-details.html">Request1</a>
+                                        <a href="#"><?php echo $child->childName; ?></a>
                                     </h3>
                                     
-                                    <div class="d-flex count_time" id="clockdiv1">
-                                       details of the child
-                                    </div>
+                                     <b>Age:</b> <?php echo $child->childAge; ?> <br>
+                                     <b>Parents:</b> <?php echo " ".$child->parents; ?> <br>
+                                     <b>Education:</b> <?php echo " ".$child->education; ?> <br> <br>
+
                                     <a href="#" class="primary_btn">Accept</a>
 
                                     <a href="#" class="primary_btn" style="background-color: red; margin-top:10px;">Reject</a>
@@ -74,88 +98,9 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-6">
-                    <div class="single_event">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 col-md-6">
-                                <figure>
-                                    <img class="img-fluid w-100" src="img/event/e2.jpg" alt="">
-                                    <div class="img-overlay"></div>
-                                </figure>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="content_wrapper">
-                                    <h3 class="title">
-                                        <a href="event-details.html">Request2</a>
-                                    </h3>
-                                    
-                                    <div class="d-flex count_time" id="clockdiv2">
-                                       details
-                                    </div>
-                                    <a href="#" class="primary_btn">Accept</a>
-
-                                    <a href="#" class="primary_btn" style="background-color: red; margin-top:10px;">Reject</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="single_event">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 col-md-6">
-                                <figure>
-                                    <img class="img-fluid w-100" src="img/event/e3.jpg" alt="">
-                                    <div class="img-overlay"></div>
-                                </figure>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="content_wrapper">
-                                    <h3 class="title">
-                                        <a href="event-details.html">Request 3</a>
-                                    </h3>
-                                    
-                                    <div class="d-flex count_time" id="clockdiv3">
-                                      details
-                                    </div>
-                                    <a href="#" class="primary_btn">Accept</a>
-
-                                    <a href="#" class="primary_btn" style="background-color: red; margin-top:10px;">Reject</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="single_event">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 col-md-6">
-                                <figure>
-                                    <img class="img-fluid w-100" src="img/event/e4.jpg" alt="">
-                                    <div class="img-overlay"></div>
-                                </figure>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="content_wrapper">
-                                    <h3 class="title">
-                                        <a href="event-details.html">Request 4</a>
-                                    </h3>
-                                   
-                                    <div class="d-flex count_time" id="clockdiv4">
-                                        details
-                                    </div>
-                                    <a href="#" class="primary_btn">Accept</a>
-
-                                    <a href="#" class="primary_btn" style="background-color: red; margin-top:10px;">Reject</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                        <?php
+                    }
+                ?>
                 
             </div>
         </div>

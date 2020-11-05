@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -114,32 +116,51 @@
 						</p>
 					</div>
 				</div>
+
+				<?php
+
+					require 'db.php';
+
+					$q = "select * from child_details";
+
+					$result = mysqli_query($con, $q);
+
+					$num = mysqli_num_rows($result);
+
+					?>
+
+
 				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
 					<div class="collection-box">
-						<h3 class="color1"><span class="counter"></span> M</h3>
+						<h3 class="color3"><span class="counter"></span> child</h3>
+						<i class="lnr lnr-arrow-up"></i>
+						<p>2018</p>
+					</div>
+				</div>
+				
+				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
+					<div class="collection-box">
+						<h3><span class="counter"></span> child</h3>
+						<i class="lnr lnr-arrow-up"></i>
+						<p>2019</p>
+					</div>
+				</div>
+
+				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
+					<div class="collection-box">
+						<h3 class="color1">
+						<?php echo $num; ?> child</h3>
 						<i class="lnr lnr-arrow-up"></i>
 						<p>2020</p>
 					</div>
 				</div>
+
+				
 				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
 					<div class="collection-box">
-						<h3><span class="counter"></span> M</h3>
+						<h3 class="color4"><span class="counter"></span> child</h3>
 						<i class="lnr lnr-arrow-up"></i>
 						<p>2021</p>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
-					<div class="collection-box">
-						<h3 class="color3"><span class="counter"></span> M</h3>
-						<i class="lnr lnr-arrow-up"></i>
-						<p>2022</p>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
-					<div class="collection-box">
-						<h3 class="color4"><span class="counter"></span> M</h3>
-						<i class="lnr lnr-arrow-up"></i>
-						<p>2023</p>
 					</div>
 				</div>
 			</div>
