@@ -36,76 +36,46 @@ if(isset($_POST['subm'])){
 	$query = $dbh ->prepare($sql);
 	$query->execute();
 	$results = $query -> fetchALL(PDO::FETCH_OBJ);
-	var_dump($results);
 
 
-
-
-
-
-
-
-
-
-
-
-	
-
-// if($query->rowCount()> 0){
+if($query->rowCount()> 0){
     
-//     foreach($results as $result) {
+    foreach($results as $result) {
 
 
-// 		$mail = new PHPMailer;
+		$mail = new PHPMailer;
 
-// 		// $mail->SMTPDebug = 4;                               // Enable verbose debug output
+		// $mail->SMTPDebug = 4;                               // Enable verbose debug output
 
-// 		$mail->isSMTP();                                      // Set mailer to use SMTP
-// 		$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-// 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
-// 		$mail->Username = EMAIL;                 // SMTP username
-// 		$mail->Password = PASS;                           // SMTP password
-// 		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-// 		$mail->Port = 587;                                    // TCP port to connect to
+		$mail->isSMTP();                                      // Set mailer to use SMTP
+		$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		$mail->Username = EMAIL;                 // SMTP username
+		$mail->Password = PASS;                           // SMTP password
+		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = 587;                                    // TCP port to connect to
 
-// 		$mail->setFrom(EMAIL, 'Helping Hand');
-// 		$mail->addAddress($result->email             );     // Add a recipient
+		$mail->setFrom(EMAIL, 'Helping Hand');
+		$mail->addAddress($result->email             );     // Add a recipient
 
-// 		$mail->addReplyTo(EMAIL);
+		$mail->addReplyTo(EMAIL);
 		
-// 		$mail->addAttachment($_FILES['file']['tmp_name'], $_FILES['file']['name']);
+		$mail->addAttachment($_FILES['file']['tmp_name'], $_FILES['file']['name']);
 
-// 		$mail->isHTML(true);                                  // Set email format to HTML
+		$mail->isHTML(true);                                  // Set email format to HTML
 
-// 		$mail->Subject = 'Help child';
-// 		$mail->Body    = '<div style="border:2px solid red;">This is the HTML message body <b>in bold!</b></div>
-// 		<p>Amit MAhajan</p>';
-// 		$mail->AltBody = 'helping is a good nature';
+		$mail->Subject = 'Help needy people';
+		$mail->Body    = '<b>Child Name:</b>'.$child_name.'<br><b>Child Age:</b>'.$child_age.'<br><b>Child Parents:</b>'.$child_parents.'<br><b>Child Edication:</b>'.$edu.'<br><b>Location:</b>https://www.google.com/maps/search/?api=1&query='.$l1.','.$l2;
+		
 
-// 		if(!$mail->send()) {
-// 			echo 'Message could not be sent.';
-// 			echo 'Mailer Error: ' . $mail->ErrorInfo;
-// 		} else {
-// 			//  header("location: sending_request_form.php");
-// 		}
-// 	}
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			  header("location: sending_request_form.php");
+		}
+	}
+}
 
 
 
@@ -117,10 +87,6 @@ if(isset($_POST['subm'])){
 		$sql="INSERT INTO child_details(childName,childAge,parents,education,image, lat, lng)VALUES('$child_name','$child_age','$child_parents','$edu','$destinationfile','$l1','$l2')";
 
 		mysqli_query($con, $sql);
-
-
-		
-
 
 		header("location: sending_request_form.php");
 	}
@@ -261,7 +227,7 @@ if(isset($_POST['subm'])){
 									<div>
 										<input type="radio" name="parents" id="pyes" value="yes"> <label for="yes">Yes</label> <br>
 										<input type="radio" name="parents" id="pno" value="no"> <label for="no">No</label> <br>
-										<input type="radio" name="parents" id="pdno" value="don't"> <label for="don't">Don't Know</label>
+										<input type="radio" name="parents" id="pdno" value="dont"> <label for="dont">Don't Know</label>
 									</div>
 								</div>
 

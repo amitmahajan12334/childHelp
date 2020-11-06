@@ -108,8 +108,8 @@
 			<div class="row justify-content-center align-items-center">
 				<div class="col-lg-4 col-md-8">
 					<div class="text">
-						<h2>Experience <br>
-							How your Help
+						<h2>How much Help <br>
+							people have done <br>
 							Reach Over Years</h2>
 						<p>
 							If you’re in the luckiest one per cent of humanity, you owe it to the rest of humanity to think about the other 99 per cent.
@@ -167,6 +167,97 @@
 		</div>
 	</section>
 	<!-- End Collection Area -->
+
+
+
+
+
+
+
+
+
+
+
+
+	<section class="collection-area section-gap" style="margin-top: 10px;;">
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+				<div class="col-lg-4 col-md-8">
+					<div class="text">
+						<h2>How much donate <br>
+							People have done <br>
+							Reach Over Years</h2>
+						<p>
+							If you’re in the luckiest one per cent of humanity, you owe it to the rest of humanity to think about the other 99 per cent.
+						</p>
+					</div>
+				</div>
+
+				<?php
+
+					require 'db.php';
+
+					$q = "SELECT sum(donation_money) as donation_sum from donation";
+					$result = mysqli_query($con, $q);
+					$row = mysqli_fetch_array($result);
+					$sum = $row['donation_sum'];
+
+				?>
+
+
+				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
+					<div class="collection-box">
+						<h3 class="color3"><span class="counter"></span> Donate</h3>
+						<i class="lnr lnr-arrow-up"></i>
+						<p>2018</p>
+					</div>
+				</div>
+				
+				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
+					<div class="collection-box">
+						<h3><span class="counter"></span> Donate</h3>
+						<i class="lnr lnr-arrow-up"></i>
+						<p>2019</p>
+					</div>
+				</div>
+
+				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
+					<div class="collection-box">
+						<h3 class="color1">
+						<?php echo $sum; ?> Donate</h3>
+						<i class="lnr lnr-arrow-up"></i>
+						<p>2020</p>
+					</div>
+				</div>
+
+				
+				<div class="col-lg-2 col-md-4 col-sm-6 col-6">
+					<div class="collection-box">
+						<h3 class="color4"><span class="counter"></span> Donate</h3>
+						<i class="lnr lnr-arrow-up"></i>
+						<p>2021</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- start footer Area -->
 	<?php include 'footer.php'; ?>

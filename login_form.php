@@ -71,7 +71,7 @@
 
 	
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-login100" style="background-image: url('images/pexels-jessica-lewis-189857.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
 					Account Login
@@ -99,7 +99,7 @@
 						</button>
 					</div>
 
-					<div class="text-center p-t-45 p-b-4">
+					<!-- <div class="text-center p-t-45 p-b-4">
 						<span class="txt1">
 							Forgot
 						</span>
@@ -107,7 +107,7 @@
 						<a href="recover_email.php" class="txt2 hov1">
 							Username / Password?
 						</a>
-					</div>
+					</div> -->
 
 					<div class="text-center">
 						<span class="txt1">

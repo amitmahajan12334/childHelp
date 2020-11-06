@@ -1,7 +1,52 @@
 <?php 
 	if(isset($_POST['sendmail'])) {
+		require 'db.php';
 		require 'PHPMailerAutoload.php';
 		require 'credential.php';
+
+
+
+
+		$name=$_POST['name'];
+		$email=$_POST['email'];
+		$subject=$_POST['subject'];
+		$message=$_POST['message'];
+	
+		$sql="INSERT INTO contact(name,email,subject,message)VALUES('$name','$email','$subject','$message')";
+	
+		mysqli_query($con,$sql);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		$mail = new PHPMailer;
 
@@ -60,7 +105,7 @@
 		$mail->isHTML(true);                                  // Set email format to HTML
 
 		$mail->Subject = $_POST['subject'];
-		$mail->Body    = '<b>IF YOU SEE SOMEONE WITHOUT A SMILE, GIVE THEM ONE OF YOURS</b>'.'Br>'.'Thank You for your feedback.';
+		$mail->Body    = '<b>IF YOU SEE SOMEONE WITHOUT A SMILE, GIVE THEM ONE OF YOURS</b>'.'<Br><br><Br><br>'.'Thank You for your feedback.';
 
 		if(!$mail->send()) {
 		    echo 'Message could not be sent.';

@@ -7,11 +7,11 @@
 						<div class="single-footer-widget tp_widgets">
 							<h4 class="footer_title large_title">Our Mission</h4>
 							<p>
-								So seed seed green that winged cattle in. Gathering thing made fly you're no 
-								divided deep moved us lan Gathering thing us land years living.
+							The aim of our project is to make a website which acts as a bridge or a connection which binds children’s and NGO with the help of users/people around. 
+							Here our website just acts as a medium in between. There are many peoples around us who really wish to save suffering children’s that they meet every day.
 							</p>
 							<p>
-								So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved 
+							So, we just help them to help children’s and to give them a life they desire.
 							</p>
 						</div>
 					</div>
@@ -20,7 +20,9 @@
 							<h4 class="footer_title">Quick Links</h4>
 							<ul class="list">
 								<li><a href="index.php">Home</a></li>
+								<li><a href="update_form.php">Update Account</a></li>
 								<li><a href="request.php">Requests</a></li>
+								<li><a href="accept_page.php">Accepted Requests</a></li>
 							</ul>
 						</div>
 					</div>
@@ -45,15 +47,15 @@
 									<span class="fa fa-location-arrow"></span>
 									Head Office
 								</p>
-								<p>lovely professional university</p>
+								<p>Lovely Professional University, Phagwara, 144401</p>
 	
 								<p class="sm-head">
 									<span class="fa fa-phone"></span>
 									Phone Number
 								</p>
 								<p>
-									+123 456 7890 <br>
-									+123 456 7890
+								+123 456 7890
+									
 								</p>
 	
 								<p class="sm-head">
@@ -61,8 +63,7 @@
 									Email
 								</p>
 								<p>
-									amitmahajan264889@gmail.com <br>
-									www.infoexample.com
+								helpinghandofficial143@gmail.com
 								</p>
 							</div>
 						</div>

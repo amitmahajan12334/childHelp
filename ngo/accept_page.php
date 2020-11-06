@@ -49,8 +49,8 @@ $query2->execute([$_SESSION['user']['id']]);
             <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
             <div class="container">
                 <div class="banner_content text-center">
-                    <h2>Requests</h2>
-                    <p> “The best way to not feel hopeless is to get up and do something. Don’t wait for good things to happen to you. If you go out and make some good things happen, you will fill the world with hope, you will fill yourself with hope.” </p>
+                    <h2>Request Accepted</h2>
+                    <p> “The best antidote I know for worry is work. The best cure for weariness is the challenge of helping someone who is even more tired. One of the great ironies of life is this: He or she who serves almost always benefits more than he or she who is served.” </p>
                 </div>
             </div>
         </div>
@@ -61,35 +61,35 @@ $query2->execute([$_SESSION['user']['id']]);
 	<section class="event_area section_gap_top">
         <div class="container">
             <div class="main_title">
-                <h2>Requests</h2>
+                <h2>Requests which is accepted by you!</h2>
                 
             </div>
-        
+
             <div class="row">
-                <?php
-                    foreach ($children as $child) {
+            <?php
+                    foreach ($accepted as $child_a) {
                         ?>
                         <div class="col-lg-6">
                     <div class="single_event">
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-6">
                                 <figure>
-                                    <img class="img-fluid w-100" src="<?php echo "../".$child->image ?>" alt="">
+                                    <img class="img-fluid w-100" src="<?php echo "../".$child_a->image ?>" alt="">
                                     <div class="img-overlay"></div>
                                 </figure>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="content_wrapper">
                                     <h3 class="title">
-                                        <a href="#"><?php echo $child->childName; ?></a>
+                                        <a href="#"><?php echo $child_a->childName; ?></a>
                                     </h3>
                                     
-                                     <b>Age:</b> <?php echo $child->childAge; ?> <br>
-                                     <b>Parents:</b> <?php echo " ".$child->parents; ?> <br>
-                                     <b>Education:</b> <?php echo " ".$child->education; ?> <br> <br>
+                                     <b>Age:</b> <?php echo $child_a->childAge; ?> <br>
+                                     <b>Parents:</b> <?php echo " ".$child_a->parents; ?> <br>
+                                     <b>Education:</b> <?php echo " ".$child_a->education; ?> <br> <br>
+                                     <a target="_blank" href="<?php echo 'https://www.google.com/maps/search/?api=1&query='.$child_a->lat.','.$child_a->lng ?>" style="margin-bottom: 10px; background-color:blue;" class="primary_btn">View Location</a>
 
-                                     <a class="primary_btn" target="_blank" href="<?php echo 'https://www.google.com/maps/search/?api=1&query='.$child->lat.','.$child->lng ?>" style="margin-bottom: 10px; background-color:blue;" >View Location</a>
-                                    <a href="accept.php?status=1&child_id=<?php echo $child->id?>&ngo_id=<?php echo $_SESSION['user']['id']?>" class="primary_btn">Accept</a>
+                                    <a href="accept.php?status=0&child_id=<?php echo $child_a->id?>&ngo_id=<?php echo $_SESSION['user']['id']?>" class="primary_btn" style="background-color:purple;">Restore</a>
                                 </div>
                             </div>
                         </div>
@@ -98,8 +98,7 @@ $query2->execute([$_SESSION['user']['id']]);
                         <?php
                     }
                 ?>
-                
-            </div>          
+            </div>
         </div>
     </section>
     <!--================ End Recent Event Area =================-->

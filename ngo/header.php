@@ -32,8 +32,10 @@
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav ml-auto">
-								<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li> 
+								<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+								<li class="nav-item"><a class="nav-link" href="update_form.php">Update account</a></li> 
 								<li class="nav-item"><a class="nav-link" href="request.php">Requests</a></li> 
+								<li class="nav-item"><a class="nav-link" href="accept_page.php">Accepted Requests</a></li> 
 								<li class="nav-item"><a class="nav-link" href="../logout.php" style="color: red;" onmouseover="this.style.color='green'" onmouseout="this.style.color='red'">LOGOUT</a></li>
                                 
                             
