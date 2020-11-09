@@ -196,7 +196,7 @@
 				</div>
 				<div class="col-lg-7 col-md-6 col-sm-8 header-right">
 					<div class="">
-						<img class="img-fluid w-100" src="img/banner-img.jpg" alt="">
+						<img class="img-fluid w-100" src="img/banner-img2.jpg" alt="">
 					</div>
 					<div class="form-wrap about-content">
 						<p class="text-white m-0">

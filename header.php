@@ -44,14 +44,14 @@
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li class="menu-active"><a href="index.php">Home</a></li>
-						<li><a href="login_form.php">NGO login</a></li>
+						<li class="menu-active" style="color: red;"><a href="index.php">Home</a></li>
 						<li><a href="donation.php">Donate</a></li>
 						</li>
 						<li class="menu-has-children"><a href="#">Pages</a>
 							<ul>
 								<li><a href="donation.php">Donation</a></li>
-								<li><a href="login_form.php">NGO login</a></li>
+								<li><a href="contact.php">Contact</a></li>
+								<li><a href="about.php">About</a></li>
 							</ul>
 						</li>
 						<li><a href="contact.php">Contact</a></li>

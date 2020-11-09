@@ -1,0 +1,315 @@
+<html>
+            <head>
+                <title>AI Chatbot</title>
+                <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+                <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+            </head>
+    <body onload=default_msg()>
+        <div id="top">
+            <h2 id="foo"></h2>
+            </div>
+        </div>
+        <div id="bottom">
+               <input type="text" autocomplete="off" onfocus="document.getElementById('btn').style.pointerEvents='auto';" id="input" autocomplete="off" list="commands" placeholder="Write your message...">
+               <datalist id="commands">
+                   <!-- add commands -->
+                   <option>About Wesbite</option>
+                   <option>How to Use</option>
+                   <option>Donation</option>
+               </datalist>
+               <img src="chatbot_send.png" onclick="usercmd()" id="btn" style="pointer-events: none;">
+                <center><img src="chatbot_off.png" onclick="speaker_toggle()" id="mybtn"</center>
+
+        </div>
+    </body>
+    <style>
+        h2{
+            font-family: 'Open Sans', sans-serif;
+            font-weight: normal;
+        }
+    #top{
+        overflow-y: auto;
+        height:80vh;
+        width:98vw;
+        overflow: scroll;
+        border-radius: 5%;
+        background:#ffffff4d;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    ::-webkit-scrollbar{
+		width:0px;
+		background: transparent;
+	}
+	::-webkit-scrollbar-thumb{
+		background: #FF0000;
+	}
+    #bottom{
+        margin-top: 7%;
+        border-radius:5%;
+        height:20vh;
+        width:98vw;
+        background: transparent;
+    }
+    body{font-family: 'Open Sans', sans-serif;
+	}
+    #btn{
+    margin-top: 0.3%;
+    z-index: 99;
+    height:50px ;
+    width: 50px;
+    float:right;
+    outline: none;
+    border-radius: 50%;
+    }
+    #inputbox{
+        bottom: 1px;
+    }
+    #input{
+    outline: none;
+    border-radius: 25px;
+    border: 2px solid #545454;
+    padding: 20px;
+    width: 86vw;
+    height: 50px;
+    }
+li{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 18px;
+  width: 90vw;
+  margin: 10px 0;
+
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+  font-size: 18px;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+#btn:hover{
+    background-color: #111111;
+}
+#speaker2{
+    width: 40px;
+    height: 40px;
+}
+
+#mybtn{
+    height:50px ;
+    border-radius:50% ;
+    width: 50px;
+}
+#mybtn:hover{
+    background: #000;
+}
+    </style>
+    <script>
+    var input=document.getElementById("input");
+    input.addEventListener("keyup",function(event){
+        if(event.keyCode==13){
+            document.getElementById("btn").click();
+        }
+    });
+
+    function usercmd(){
+        document.getElementById("btn").style.pointerEvents="none";
+        var cmd=document.getElementById("input").value;
+        dothat(cmd);
+    }
+    function dothat(cmd){
+        m = [];
+        var i=0;
+        m[i]='<li style="list-style-type:none"><div class="container" id="frstuser"><img src="chatbot_user.png" alt="Avatar"><p id="user">'+cmd+'</p></div></li>';
+        document.getElementById("input").value="";  
+        document.getElementById('foo').innerHTML+=m;
+        clearInterval(interval);
+        ai(cmd);
+    }
+
+    var interval;
+    var sound=0;
+    var first_run=0;
+    var list_bot_count=1;
+   
+    function ai(cmd){
+        document.getElementById("input").placeholder="";
+        m = '<li style="list-style-type:none"><div class="container darker" id="bot_"><img src="chatbot_bot.png" alt="Avatar" class="right"><p id="bot'+list_bot_count+'"></p></div></li>';
+        document.getElementById('foo').innerHTML+=m;
+        list_bot_count+=1;
+        bot_id=0;
+        text_res="...";
+        var speed = 30;
+        var io=0;
+        cmd=cmd.toLowerCase();
+        const questions=[
+            //add questions here
+            //hello_words
+            ["hello","hi","hey","hello bot","hello there"],
+
+            //greetings
+            ["fine","good","awesome","i need help"],
+            
+            //bye
+            ["bye","okay bye","good bye","exit","quit"],
+
+            //About website
+            ["what can you do","help","commands"],
+
+            //What website can do
+            ["website about","What website can do","what website is about","about"],
+
+            //About Donation
+            ["donation utilization","what you do with donations","use donation","use donations"],
+            ["donation"],
+
+            //How to use
+            ["how to use"],
+
+            //Made by
+            ["who made you","who created you","who is your maker"]
+
+            ];
+
+        const reply=[
+            //add answers here
+            //answer 1
+            ["Hello Customer.","Hello there.. How can I help you.","Hi. Please Enter your query...","Hello, Please ask your Question."],
+            //answer 2
+            ["Great, How can I help?"],
+            //answer 3
+            ["Good Bye... Have a Nice Day...","Thanks for using our service...","We hope we helped you with your query."],
+            //about website
+            ["You can ask me about Website, and other services related to it.\n You can try some commands:\n1. How to use\n2. About Website\n3. Donations"],
+            //what website can do
+            ["This website acts as a platform that links child beggars, who are suffering to NGO's.\n And thus giving them a life they desire."],
+            //About donations
+            ["The donation fund is directly sent to the NGO's who is in head."],
+            ["Yes, you can add your donations. It will be a great help..."],
+            //How to use
+            ["Steps under construction..."],
+            //Made By
+            ["It is Kavya who made me with all her efforts."]
+        ];
+
+        text_res=compareqa(questions,reply,cmd);
+        bot_id=list_bot_count-1;
+        let donation_link_show=0
+        typeWriter();
+        function typeWriter() {
+             if (io < text_res.length) {
+                 if(io==0){
+                    if(sound==1){
+                     speakit();
+                }
+                 }
+                if(text_res[io]=="\n"){
+                    document.getElementById("bot"+bot_id).innerText+="\n";
+                }
+                else{
+                document.getElementById("bot"+bot_id).innerHTML+=text_res.charAt(io);
+                }
+                io++;
+                setTimeout(typeWriter, speed);
+                }
+                else{
+                    if(cmd.includes("donation")){
+                         document.getElementById("bot"+bot_id).innerHTML+="<br> <a href='donation'>Click Here To Make Donation</a>";
+                    }
+                }
+        }
+    }
+
+
+    function compareqa(triggers, reply, text){
+            let min=0;
+            let max=0;
+            let item="Sorry! Requested query is not available at this time...";
+            for (let x = 0; x < triggers.length; x++) {
+                for (let y = 0; y < reply.length; y++) {
+                    if (text.includes(triggers[x][y])){
+                    items = reply[x];
+                    max=items.length;
+                    item = items[Math.floor(Math.random() * (+max - +min)) + +min];
+                    break;
+                    }
+            }
+        }
+         
+        return item;
+    }
+
+    function speakit(){
+        responsiveVoice.speak(""+text_res+"","US English Female");
+    }
+    function speaker_toggle(){
+        if(sound==0){
+            sound=1;
+            document.getElementById("mybtn").src="chatbot_on.png";
+            responsiveVoice.speak("Speech Turned ON","US English Female");
+        }
+        else{
+            sound=0;
+            document.getElementById("mybtn").src="chatbot_off.png";
+            responsiveVoice.speak("Speech Turned OFF","US English Female");
+        }
+    }
+    var jo;
+    var speed2=30;
+    function typeWriter_default(){
+                if (jo< text_res.length) {
+                 if(jo==0){
+                    if(sound==1){
+                     speakit();
+                }
+                 }
+                if(text_res[jo]=="\n"){
+                    document.getElementById("bot"+bot_id).innerText+="\n";
+                }
+                else{
+                document.getElementById("bot"+bot_id).innerHTML+=text_res.charAt(jo);
+                }
+                jo++;
+                interval=setTimeout(typeWriter_default, speed2);
+                }
+        }
+    function default_msg(){
+        m = '<li style="list-style-type:none"><div class="container darker"><img src="chatbot_bot.png" alt="Avatar" class="right"><p id="bot0"></p></div></li>';
+        document.getElementById('foo').innerHTML+=m;
+        bot_id=0;
+        text_res="Hi there, I am your Assistant you can ask me your queries...\n";
+        text_res+="You can ask me about Website, and other services related to it.\n You can try some commands:\n1. How to use\n2. About Website\n3. Donations";
+        jo=0;
+        typeWriter_default();
+    }
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+   }
+    </script>
+</html>

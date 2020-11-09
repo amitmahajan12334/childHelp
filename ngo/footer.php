@@ -7,7 +7,7 @@
 						<div class="single-footer-widget tp_widgets">
 							<h4 class="footer_title large_title">Our Mission</h4>
 							<p>
-							The aim of our project is to make a website which acts as a bridge or a connection which binds children’s and NGO with the help of users/people around. 
+							The aim of our website is to make a website which acts as a bridge or a connection which binds children’s and NGO with the help of users/people around. 
 							Here our website just acts as a medium in between. There are many peoples around us who really wish to save suffering children’s that they meet every day.
 							</p>
 							<p>
