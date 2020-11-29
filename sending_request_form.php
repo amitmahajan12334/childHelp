@@ -27,19 +27,6 @@ if(isset($_POST['subm'])){
 	$fileextstored = array('png', 'jpg', 'jpeg');
 
 
-	if(in_array($filecheck,$fileextstored)){
-		$destinationfile = 'uploaded/'.$filename;
-		move_uploaded_file($filetmp,$destinationfile);
-
-
-		$sql="INSERT INTO child_details(childName,childAge,parents,education,image, lat, lng)VALUES('$child_name','$child_age','$child_parents','$edu','$destinationfile','$l1','$l2')";
-
-		mysqli_query($con, $sql);
-
-		header("location: sending_request_form.php");
-	}
-
-
 	
 	$sql = "SELECT id,name,email, (3959 * acos( cos( radians($l1)) * cos( radians( lat )) * cos( radians( lng ) - radians($l2))
 	+ sin( radians($l1)) * sin( radians( lat )))) AS distance FROM markers HAVING distance < 20  ORDER BY distance
@@ -89,7 +76,17 @@ if($query->rowCount()> 0){
 	}
 }
 
+if(in_array($filecheck,$fileextstored)){
+	$destinationfile = 'uploaded/'.$filename;
+	move_uploaded_file($filetmp,$destinationfile);
 
+
+	$sql="INSERT INTO child_details(childName,childAge,parents,education,image, lat, lng)VALUES('$child_name','$child_age','$child_parents','$edu','$destinationfile','$l1','$l2')";
+
+	mysqli_query($con, $sql);
+
+	header("location: sending_request_form.php");
+}
 
 	
 	
