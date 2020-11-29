@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2020 at 02:49 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- Generation Time: Nov 29, 2020 at 11:39 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,7 @@ CREATE TABLE `child_details` (
 --
 
 INSERT INTO `child_details` (`id`, `childName`, `childAge`, `parents`, `education`, `image`, `lat`, `lng`, `status`) VALUES
-(59, 'Amit Mahajan', '5', 'no', 'notEducated', 'uploaded/pexels-bess-hamiti-35537.jpg', '25.451743', '78.5941198', 1),
+(59, 'Amit Mahajan', '5', 'no', 'notEducated', 'uploaded/pexels-bess-hamiti-35537.jpg', '25.451743', '78.5941198', 0),
 (60, 'Karan Patel', '6', 'yes', 'notEducated', 'uploaded/pexels-daria-shevtsova-789786.jpg', '25.451743', '78.5941198', 0),
 (61, 'Meet1', '3', 'dont', 'notEducated', 'uploaded/pexels-jessica-lewis-189857.jpg', '21.519177', '70.441285', 0),
 (62, 'Meet2', '4', 'yes', 'notEducated', 'uploaded/pexels-jonas-mohamadi-1416736.jpg', '21.519177', '70.441285', 0),
@@ -55,7 +55,8 @@ INSERT INTO `child_details` (`id`, `childName`, `childAge`, `parents`, `educatio
 (67, 'siva', '7', 'yes', 'notEducated', 'uploaded/pexels-pixabay-48794.jpg', '31.1471305', '75.34121789999999', 0),
 (68, 'abcd', '3', 'yes', 'notEducated', 'uploaded/pexels-rebecca-zaal-764681.jpg', '31.1471305', '75.34121789999999', 0),
 (69, 'abcd2', '2', 'yes', 'primary', 'uploaded/pexels-daniel-edeke-1442751.jpg', '31.1471305', '75.34121789999999', 0),
-(70, 'zz', '3', 'dont', 'primary', 'uploaded/pexels-agung-pandit-wiguna-1320701.jpg', '25.451790199999998', '78.5941051', 1);
+(70, 'zz', '3', 'dont', 'primary', 'uploaded/pexels-agung-pandit-wiguna-1320701.jpg', '25.451790199999998', '78.5941051', 1),
+(71, 'Meet4', '4', 'yes', 'primary', 'uploaded/pexels-bess-hamiti-35537.jpg', '21.519177', '70.441285', 0);
 
 -- --------------------------------------------------------
 
@@ -143,7 +144,8 @@ INSERT INTO `markers` (`id`, `name`, `address`, `lat`, `lng`, `email`, `username
 (15, 'Manav Paryavan Seva Trust', 'AMBEDKAR NAGAR, BILKHA ROAD, OPP. AMBEDKAR BHAVAN, STREET NO.3, JUNAGADH, PIN-362001', '21.496086', '70.468863', 'email', 'mpst123', 'mpst123', '9078563421'),
 (16, 'Humankind', 'Humankind, F/3, Nanakram Super Market, Ramnagar, Sabarmati, Ahmedabad', '23.084332 ', '72.591336', 'email', 'kind123', 'kind123', '8967452345'),
 (17, 'amit', 'shivaji nagr', '1243', '12334', 'amit@gmail.com', 'amit123', 'amit123', '123456789'),
-(18, 'amit', 'edba qeed', '1234', '456789', 'amit1@gmail.com', 'amit1', 'amit1', '7376132434');
+(18, 'amit', 'edba qeed', '1234', '456789', 'amit1@gmail.com', 'amit1', 'amit1', '7376132434'),
+(19, 'shivam', '', '', '', 'shivam@gmail.com', 'shivam123', 'shivam123', '');
 
 -- --------------------------------------------------------
 
@@ -181,10 +183,11 @@ CREATE TABLE `records` (
 
 INSERT INTO `records` (`id`, `child_id`, `ngo_id`) VALUES
 (8, 63, 1),
-(12, 59, 3),
 (13, 66, 3),
 (14, 70, 3),
-(16, 65, 3);
+(16, 65, 3),
+(17, 71, 3),
+(18, 71, 15);
 
 --
 -- Indexes for dumped tables
@@ -234,7 +237,7 @@ ALTER TABLE `records`
 -- AUTO_INCREMENT for table `child_details`
 --
 ALTER TABLE `child_details`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -252,7 +255,7 @@ ALTER TABLE `donation`
 -- AUTO_INCREMENT for table `markers`
 --
 ALTER TABLE `markers`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
@@ -264,7 +267,7 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT for table `records`
 --
 ALTER TABLE `records`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
